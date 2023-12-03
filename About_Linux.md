@@ -28,7 +28,7 @@ command|meaning|example|Other
 -|-|-|-  
 date | 日時を表示する| aa|-
 cd | ディレクトリを移動する| ``cd /home/tasukusato``|カレントディレクトリ``.``<br>親ディレクトリ``..``<br>ホームディレクトリ``~``<br>ルートディレクトリ``/``
-pwd|カレントディレクトリを表示する|``pwd /home/tasukusato|-
+pwd|カレントディレクトリを表示する|``pwd /home/tasukusato``|-
 ls|ファイルやディレクトリの一覧を表示する|``ls /``<br>``ls *.html``|パス名展開<br>``*``=任意の文字列<br>``?``=任意の1文字
 -|-|-|-
 -|-|-|-
