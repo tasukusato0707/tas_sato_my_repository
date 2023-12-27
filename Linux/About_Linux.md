@@ -156,7 +156,7 @@ directory|meaning
   $       # 何も表示されない
   ```
 
-## What is [|] (Pipeline) ?
+## What is [ | ] (Pipeline) ?
 
 - 複数のコマンドを連携させる機能
 - コマンドの標準出力を別のコマンドの標準入力につなげる
@@ -166,3 +166,55 @@ directory|meaning
 
   $ ls /bin | grep systemd | less
   ```
+
+## What is permission?
+
+- ファイルやディレクトリを「誰がどのように操作できるか」定めたのがパーミッション
+- `ls -l`コマンドでファイルやディレクトリのパーミッションが確認できる
+
+### file types
+
+記号 | ファイルタイプ
+-|-
+-|レギュラーファイル
+d|ディレクトリ
+l|シンボリックリンク
+c|キャラクターデバイスファイル
+b|ブロックデバイスファイル
+s|ソーシャルソケットファイル
+p|named pipe(FIFO)
+
+### permission symbol
+
+記号 | 内容
+-|-
+r | read(読み取り)
+w | write(書き込み)
+X | execute(実行)
+
+1. example
+
+  - `rwxr-xr-x`の場合
+
+    対象 | 読み取り | 書き込み | 実行
+    -|-|-|-
+    オーナー | 〇 | 〇 | 〇
+    グループユーザー | 〇 | X | 〇
+    その他ユーザー | 〇 | X | 〇
+
+### superuser
+
+- 管理者権限を持つスーパーなユーザーのこと＝rootユーザー
+  - システムの変更作業などが誰でもできる状態は危険。よって、スーパーユーザーのみが実行権限を持つように設定する
+
+  command|meaning|sample|example|Other
+  -|-|-|-|-
+  sudo|コマンドの前にsudoをつけるとスーパーユーザー(root)としてコマンドを実行|sudo <コマンド>|sudo mkdir /storage|sudoは"switch user and do"の略
+
+## What is process and job?
+
+### process
+
+- 実行中のプログラムのこと
+- コマンドを実行すると、実行ファイルをメモリに格納して、メモリ上でCPUがプログラムを実行する。1つ実行すると新しいプロセスが1つ作成される 
+
