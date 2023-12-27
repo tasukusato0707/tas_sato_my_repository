@@ -78,3 +78,91 @@ directory|meaning
 #### Reference
 
 [「分かりそう」で「分からない」でも「分かった」気になれるIT用語辞典 -> ハードリンク](https://wa3.i-3-i.info/word1151.html)
+
+## What is standard input(stdin)/output(stdout)?
+
+- プログラムが、特に何も指定されていない場合に利用するデータの標準的な入出力元
+
+- 標準入力 (stdin): コンピュータにデータを受け渡すこと<br>キーボードやファイルが使用される
+
+- 標準出力(stdout): コマンドやプログラムの結果を外に出すこと<br>ディスプレイなどが使用される
+
+- 標準エラー出力(stderr): プログラムのエラーメッセージを出力する<br>ディスプレイなどが使用される
+
+## What is [>] (redirect)?
+
+- 入出力先を変更する機能
+
+### input redirect
+
+- キーボードの代わりにファイルから入力する機能
+
+  ```console
+  # /etc/hostsファイルを入力元にしてcatコマンドを実行
+
+  $ cat < /etc/hosts
+  ```
+
+### output redirect
+
+- コマンドの実行結果を画面に表示するのではなくファイルに保存する機能
+
+  ```console
+  # lsコマンドの出力先をls.txtにして保存
+
+  $ ls > output.txt
+  $ cat > output.txt
+  ```
+
+### error redirect
+
+入出力 | 数値
+-|-
+標準入力 | 0
+標準出力 | 1
+標準エラー出力 | 2
+
+- エラー結果を画面に表示するのではなくファイルに保存する機能
+
+  ```console
+  $ ls /hoge 2> error.txt
+  $ cat error.txt
+  ```
+
+### other
+
+- まとめる場合は出力をリダイレクトした後に`2>&1`と書く
+- `>`でリダイレクト指定するとファイルを上書きする
+- `>>`でリダイレクト指定するとファイルに追記する
+
+## What is /dev/null ?
+
+- 入力先として指定しても何も返さず、出力先として指定してもデータは消え何も表示されない、スペシャルファイル
+
+### input destination
+
+- 入力が何もない状態になる
+- コマンドのテストなどで入力を空にしたいときに使用する
+
+  ```console
+  $ cat < /dev/null
+  $       # 何も表示されない
+  ```
+
+### output destination
+
+  ```console
+  $ ls / > /dev/null
+  $       # 何も表示されない
+  ```
+
+## What is [|] (Pipeline) ?
+
+- 複数のコマンドを連携させる機能
+- コマンドの標準出力を別のコマンドの標準入力につなげる
+
+  ```console
+  $ ls /bin | less
+
+  $ ls /bin | grep systemd | less
+  ```
