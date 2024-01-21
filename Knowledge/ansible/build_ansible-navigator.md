@@ -88,7 +88,28 @@
 5.  実行環境の設定ファイル作成
 
     - 作業用ユーザー（/home/ec2-user）のディレクトリ配下に、以下のようなファイルを作成する
+
       ```text
+      .
+      ├── ansible.cfg
+      ├── ansible-navigator.log
+      ├── context
+      │   ├── _build
+      │   │   ├── ansible.cfg
+      │   │   ├── bindep.txt
+      │   │   ├── config
+      │   │   │   └── ansible.cfg
+      │   │   ├── requirements.txt
+      │   │   ├── requirements.yml
+      │   │   └── scripts
+      │   │       ├── assemble
+      │   │       ├── check_ansible
+      │   │       ├── check_galaxy
+      │   │       ├── entrypoint
+      │   │       ├── install-from-bindep
+      │   │       └── introspect.py
+      │   └── Containerfile
+      └── execution-environment.yml
       ```
 
       - 作業用ディレクトリを作成する
@@ -130,14 +151,7 @@
 
           additional_build_files:
             - src: ansible.cfg
-
-          additional_build_steps:
-            prepend: |
-              RUN whoami
-              RUN cat /etc/os-release
-            append:
-              - RUN echo This is a post-install command!
-              - RUN ls -la /etc
+              dest: config
           ```
 
       - `ansible.cfg`を作成する
@@ -160,22 +174,22 @@
         $ ansible-builder build -f execution-environment.yml -t ansible_verification:v0.0.1 -v 3
         ```
 
-      - 実行環境イメージが作成されたことを確認する
-          - `podman images`コマンドで確認する
+      - 実行環境イメージが作成されたことを確認する(下記のどちらでも可能)
+          - `podman images`コマンドで確認する方法
             ```console
             $ podman images
             REPOSITORY                      TAG                 IMAGE ID      CREATED        SIZE
             localhost/ansible_verification  v0.0.1              0ee875da97ae  5 minutes ago  378 MB
             ```
 
-          - `ansible-navigator images`コマンドで確認する
+          - `ansible-navigator images`コマンドで確認する方法
             - ansible-navigatorの基本コマンドは[Ansible Navigator Documentation ansible-navigator subcommands](https://ansible.readthedocs.io/projects/navigator/subcommands/#available-subcommands)を参照
 
             ```console
             $ ansible-navigator images
-              Image               Tag                Execution environmenCreated       Size
-            0│ansible-runner      stable-2.12-latest True                21 months ago 816 MB
-            1│ansible_verificationv0.0.1             True                6 minutes ago 378 MB
-            2│centos              stream9            False               5 days ago    161 MB
-            3│creator-ee          v0.21.0            True                3 months ago  683 MB
+              Image               Tag                Execution environment     Created        Size
+            0│ansible-runner      stable-2.12-latest True                      21 months ago  816 MB
+            1│ansible_verification v0.0.1            True                      6 minutes ago  378 MB
+            2│centos              stream9            False                     5 days ago     161 MB
+            3│creator-ee          v0.21.0            True                      3 months ago   683 MB
             ```
