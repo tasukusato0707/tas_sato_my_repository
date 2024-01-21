@@ -26,9 +26,9 @@
     - vscodeのconfigファイルを開き、下記の例のようにログイン情報を設定する
         ```text
         Host {{作成したインスタンス名}}
-        HostName {{インスタンスのパブリックIPv4アドレス}} # パブリックIPはインスタンスの起動時に都度割り当て
-        User ec2-user
-        IdentityFile {{プライベートキーの保管先}}
+          HostName {{インスタンスのパブリックIPv4アドレス}} # パブリックIPはインスタンスの起動時に都度割り当て
+          User ec2-user
+          IdentityFile {{プライベートキーの保管先}}
         ```
 
     - `サイドバー`にある`Reflash`を押下し、SSHの接続情報に作成したインスタンスが表示されていることを確認する
@@ -107,7 +107,7 @@
 
           ```yml
           ---
-          version: 1
+          version: 3
 
           build_arg_defaults:
             EE_BASE_IMAGE: 'quay.io/ansible/ansible-runner:stable-2.12-latest'
@@ -115,8 +115,13 @@
           ansible_config: 'ansible.cfg'
 
           dependencies:
-            galaxy: requirements.yml
-            python: requirements.txt
+            galaxy:
+              collections:
+                - name: community.general
+                  version: 8.2.0
+            python:
+              - ansible-lint==6.22.2
+              - jmespath
 
           additional_build_steps:
             prepend: |
@@ -143,7 +148,7 @@
       - `requirements.yml`を作成する
 
           ```console
-          $ requirements.yml
+          $ vi requirements.yml
           ```
 
           - `requirements.yml`の中身
@@ -157,7 +162,7 @@
       - `requirements.txt`を作成する
 
           ```console
-          $ $ vi requirements.txt
+          $ vi requirements.txt
           ```
 
           - `requirements.text`の中身
@@ -166,3 +171,9 @@
           ansible-lint==6.22.2
           jmespath
           ```
+
+      - 下記コマンドを実行し、実行環境イメージ(execution-environment)を作成する
+
+        ```console
+        $ ansible-builder build -f execution-environment.yml -t ansible_verification:v0.0.1 -v 3
+        ```
