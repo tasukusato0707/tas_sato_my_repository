@@ -110,6 +110,10 @@
           version: 3
 
           dependencies:
+            ansible_core:
+              package_pip: "ansible-core==2.15.8"
+            ansible_runner:
+              package_pip: "ansible-runner==2.3.4"
             galaxy:
               collections:
                 - name: "community.general"
