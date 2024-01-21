@@ -150,34 +150,8 @@
 
           ```text
           [defaults]
+          [galaxy]
           host_key_checking = False
-          ```
-
-      - `requirements.yml`を作成する
-
-          ```console
-          $ vi requirements.yml
-          ```
-
-          - `requirements.yml`の中身
-
-          ```yml
-          ---
-          collections:
-            - community.general
-          ```
-
-      - `requirements.txt`を作成する
-
-          ```console
-          $ vi requirements.txt
-          ```
-
-          - `requirements.text`の中身
-
-          ```text
-          ansible-lint==6.22.2
-          jmespath
           ```
 
       - 下記コマンドを実行し、実行環境イメージ(execution-environment)を作成する
@@ -185,3 +159,23 @@
         ```console
         $ ansible-builder build -f execution-environment.yml -t ansible_verification:v0.0.1 -v 3
         ```
+
+      - 実行環境イメージが作成されたことを確認する
+          - `podman images`コマンドで確認する
+            ```console
+            $ podman images
+            REPOSITORY                      TAG                 IMAGE ID      CREATED        SIZE
+            localhost/ansible_verification  v0.0.1              0ee875da97ae  5 minutes ago  378 MB
+            ```
+
+          - `ansible-navigator images`コマンドで確認する
+            - ansible-navigatorの基本コマンドは[Ansible Navigator Documentation ansible-navigator subcommands](https://ansible.readthedocs.io/projects/navigator/subcommands/#available-subcommands)を参照
+
+            ```console
+            $ ansible-navigator images
+              Image               Tag                Execution environmenCreated       Size
+            0│ansible-runner      stable-2.12-latest True                21 months ago 816 MB
+            1│ansible_verificationv0.0.1             True                6 minutes ago 378 MB
+            2│centos              stream9            False               5 days ago    161 MB
+            3│creator-ee          v0.21.0            True                3 months ago  683 MB
+            ```
