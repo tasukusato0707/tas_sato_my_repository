@@ -109,19 +109,23 @@
           ---
           version: 3
 
-          build_arg_defaults:
-            EE_BASE_IMAGE: 'quay.io/ansible/ansible-runner:stable-2.12-latest'
-
-          ansible_config: 'ansible.cfg'
-
           dependencies:
             galaxy:
               collections:
-                - name: community.general
-                  version: 8.2.0
+                - name: "community.general"
+                  version: "8.2.0"
             python:
-              - ansible-lint==6.22.2
-              - jmespath
+              - "ansible-lint==6.22.2"
+              - "jmespath==1.0.1"
+            system:
+              - "git"
+
+          images:
+            base_image:
+              name: "quay.io/centos/centos:stream9"
+
+          additional_build_files:
+            - src: ansible.cfg
 
           additional_build_steps:
             prepend: |
