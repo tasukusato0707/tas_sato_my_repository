@@ -89,30 +89,30 @@
 
 ### 実行環境の設定ファイル作成
 
-    - 作業用ユーザー（/home/ec2-user）のディレクトリ配下に、以下のようなファイルを作成する
+- 作業用ユーザー（/home/ec2-user）のディレクトリ配下に、以下のようなファイルを作成する
 
-      ```text
-      .
-      ├── ansible.cfg
-      ├── ansible-navigator.log
-      ├── context
-      │   ├── _build
-      │   │   ├── ansible.cfg
-      │   │   ├── bindep.txt
-      │   │   ├── config
-      │   │   │   └── ansible.cfg
-      │   │   ├── requirements.txt
-      │   │   ├── requirements.yml
-      │   │   └── scripts
-      │   │       ├── assemble
-      │   │       ├── check_ansible
-      │   │       ├── check_galaxy
-      │   │       ├── entrypoint
-      │   │       ├── install-from-bindep
-      │   │       └── introspect.py
-      │   └── Containerfile
-      └── execution-environment.yml
-      ```
+  ```text
+  .
+  ├── ansible.cfg
+  ├── ansible-navigator.log
+  ├── context
+  │   ├── _build
+  │   │   ├── ansible.cfg
+  │   │   ├── bindep.txt
+  │   │   ├── config
+  │   │   │   └── ansible.cfg
+  │   │   ├── requirements.txt
+  │   │   ├── requirements.yml
+  │   │   └── scripts
+  │   │       ├── assemble
+  │   │       ├── check_ansible
+  │   │       ├── check_galaxy
+  │   │       ├── entrypoint
+  │   │       ├── install-from-bindep
+  │   │       └── introspect.py
+  │   └── Containerfile
+  └── execution-environment.yml
+  ```
 
 - 作業用ディレクトリを作成する
 
