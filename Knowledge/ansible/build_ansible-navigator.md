@@ -87,7 +87,7 @@
       ansible-navigator 3.6.0
       ```
 
-###  実行環境の設定ファイル作成
+### 実行環境の設定ファイル作成
 
     - 作業用ユーザー（/home/ec2-user）のディレクトリ配下に、以下のようなファイルを作成する
 
@@ -116,7 +116,7 @@
 
 - 作業用ディレクトリを作成する
 
-1. `ansible_verification`に移動する
+1. `ansible_verification`に作成する
        ```console
        $ mkdir ~/ansible_verification
        ```
@@ -198,4 +198,63 @@
      3│creator-ee          v0.21.0            True                      3 months ago   683 MB
      ```
 
-6. ansible-navigatorを使ったPlaybookの実行
+### ansible-navigatorを使ったPlaybookの実行
+
+- 下記のようにinventory/hosts.ymlと、playbooks/hello_world.ymlを作成する
+  - サイドバーからも作成可能
+
+  ```text
+  .
+  └── ansible_verification
+      ├── ansible.cfg
+      ├── ansible-navigator.log
+      ├── context
+      │   ├── _build
+      │   │   ├── bindep.txt
+      │   │   ├── config
+      │   │   │   └── ansible.cfg
+      │   │   ├── requirements.txt
+      │   │   ├── requirements.yml
+      │   │   └── scripts
+      │   │       ├── assemble
+      │   │       ├── check_ansible
+      │   │       ├── check_galaxy
+      │   │       ├── entrypoint
+      │   │       ├── install-from-bindep
+      │   │       └── introspect.py
+      │   └── Containerfile
+      ├── execution-environment.yml
+      ├── inventory
+      │   └── hosts.yml
+      └── playbooks
+          └── hello_world.yml
+  ```
+
+1. 下記内容で`hosts.yml`を作成する
+
+   ```yml
+   ---
+   all:
+     hosts:
+       localhost:
+   ```
+
+2. 下記内容で`hello_world.yml`を作成する
+
+   ```yml
+   ---
+   - name: "Sample Play"
+     hosts: localhost
+     gather_facts: false
+     tasks:
+       - name: "Sample Play"
+         ansible.builtin.debug:
+           msg: "Hello World!"
+   ```
+
+3. 下記コマンドを実行し、playbookを実行する
+
+   ```console
+   $ cd ansible_verification/
+   $ ansible-navigator run playbooks/hello_world.yml -i hosts.yml
+   ```
