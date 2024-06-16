@@ -1,16 +1,49 @@
 # First step of Platform  Engineering
+<!-- TOC -->
 
-[toc]
+- [First step of Platform  Engineering](#first-step-of-platform--engineering)
+  - [Hype Cycles from Gartner](#hype-cycles-from-gartner)
+    - [先進テクノロジーのハイプサイクル:2023年](#先進テクノロジーのハイプサイクル2023年)
+    - [ソフトウェアエンジニアリングのハイプサイクル:2023年](#ソフトウェアエンジニアリングのハイプサイクル2023年)
+  - [Cloud Native \& DevOps](#cloud-native--devops)
+    - [Cloud Native](#cloud-native)
+    - [DevOps](#devops)
+    - [効率的なDevOpsの実現 =\> Platform Engineering](#効率的なdevopsの実現--platform-engineering)
+  - [What is Platform Engineering?](#what-is-platform-engineering)
+    - [From Gartner](#from-gartner)
+    - [From platformengineering.org](#from-platformengineeringorg)
+  - [ざっくりまとめると](#ざっくりまとめると)
+  - [更に雑にまとめると (※個人の解釈)](#更に雑にまとめると-個人の解釈)
+  - [①開発者向けセルフサービス型の共通基盤がなぜ必要か？](#開発者向けセルフサービス型の共通基盤がなぜ必要か)
+    - [クラウド＆DevOpsの登場](#クラウドdevopsの登場)
+    - [ちなみに...](#ちなみに)
+    - [クラウドの登場 =\> Devopsの推進 =\> 認知負荷の増大化](#クラウドの登場--devopsの推進--認知負荷の増大化)
+    - [認知負荷とは](#認知負荷とは)
+    - [3種の認知負荷](#3種の認知負荷)
+  - [①のまとめ](#のまとめ)
+  - [②セルフサービス型の共通基盤をプロダクトで運用していくためには？](#セルフサービス型の共通基盤をプロダクトで運用していくためには)
+    - [Platform as a Service](#platform-as-a-service)
+    - [Internal Developer Platform](#internal-developer-platform)
+    - [Internal Developer Portal](#internal-developer-portal)
+    - [IDPの代表例](#idpの代表例)
+    - [共通プラットフォームのアンチパターン](#共通プラットフォームのアンチパターン)
+    - [目指すべきもの](#目指すべきもの)
+    - [どうやって目指していくのか？](#どうやって目指していくのか)
+      - [ProductとProject](#productとproject)
+      - [ProductとProjectの関係性](#productとprojectの関係性)
+  - [まとめ](#まとめ)
+
+<!-- /TOC -->
 
 ## Hype Cycles from Gartner
 
-**先進テクノロジーのハイプサイクル:2023年**
+### 先進テクノロジーのハイプサイクル:2023年
 
 現在ピーク期かつ5-10年以内にはクラウドネイティブがモダンな開発手法となっている
 
 ![image](./image/hypesycle_for_emerging_technologies_2023.png)
 
-**ソフトウェアエンジニアリングのハイプサイクル:2023年**
+### ソフトウェアエンジニアリングのハイプサイクル:2023年
 
 プラットフォーム エンジニアリングが2-5年以内に定常的に採用されることが予想されている
 
@@ -18,13 +51,13 @@
 
 ---
 
-# Cloud Native & DevOps
+## Cloud Native & DevOps
 
-## Cloud Native
+### Cloud Native
 
 クラウドの**小さくはじめて・素早く・柔軟に**デプロイできる利点を活用したシステムの設計/構成
 
-## DevOps
+### DevOps
 
 アプリケーションなどの**開発と運用を柔軟で迅速に実施し、かつイテレーティブに改善していく**こと
 
@@ -34,6 +67,8 @@
 - 継続的デリバリー(CD)
 - 計測とフィードバック
 ```
+
+### 効率的なDevOpsの実現 => Platform Engineering
 
 ## What is Platform Engineering?
 
@@ -79,7 +114,7 @@
 
 ![image](./image/landscape.png)
 
-### クラウドの登場 -> Devopsの推進 -> 認知負荷の増大化
+### クラウドの登場 => Devopsの推進 => 認知負荷の増大化
 
 ![image](./image/cognitive_load.png)
 
@@ -99,6 +134,7 @@
     - 学習以外(指導者や教材)の難易度により生じる負荷
 - 学習関連負荷 (Germane cognitive load)
     - 学習目標の達成のための認知活動により生じる負荷
+
 ## ①のまとめ
 
 ## ②セルフサービス型の共通基盤をプロダクトで運用していくためには？
