@@ -1,16 +1,39 @@
 # First step of Platform  Engineering
 
+[toc]
+
 ## Hype Cycles from Gartner
 
 **先進テクノロジーのハイプサイクル:2023年**
+
+現在ピーク期かつ5-10年以内にはクラウドネイティブがモダンな開発手法となっている
 
 ![image](./image/hypesycle_for_emerging_technologies_2023.png)
 
 **ソフトウェアエンジニアリングのハイプサイクル:2023年**
 
+プラットフォーム エンジニアリングが2-5年以内に定常的に採用されることが予想されている
+
 ![image](./image/hypesycle_for_software_engineering_2023.png)
 
 ---
+
+# Cloud Native & DevOps
+
+## Cloud Native
+
+クラウドの**小さくはじめて・素早く・柔軟に**デプロイできる利点を活用したシステムの設計/構成
+
+## DevOps
+
+アプリケーションなどの**開発と運用を柔軟で迅速に実施し、かつイテレーティブに改善していく**こと
+
+```
+- 自動化
+- 継続的インテグレーション(CI)
+- 継続的デリバリー(CD)
+- 計測とフィードバック
+```
 
 ## What is Platform Engineering?
 
