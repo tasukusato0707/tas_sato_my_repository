@@ -8,7 +8,7 @@
   - [Cloud Native \& DevOps](#cloud-native--devops)
     - [Cloud Native](#cloud-native)
     - [DevOps](#devops)
-    - [効率的なDevOpsの実現 =\> Platform Engineering](#効率的なdevopsの実現--platform-engineering)
+    - [効率的なDevOpsの実現 =\> Platform Engineeringの登場](#効率的なdevopsの実現--platform-engineeringの登場)
   - [What is Platform Engineering?](#what-is-platform-engineering)
     - [From Gartner](#from-gartner)
     - [From platformengineering.org](#from-platformengineeringorg)
@@ -20,9 +20,10 @@
     - [クラウドの登場 =\> Devopsの推進 =\> 認知負荷の増大化](#クラウドの登場--devopsの推進--認知負荷の増大化)
     - [認知負荷とは](#認知負荷とは)
     - [3種の認知負荷](#3種の認知負荷)
+  - [Internal Developer PortalとInternal Developer Platform](#internal-developer-portalとinternal-developer-platform)
     - [Internal Developer Platform](#internal-developer-platform)
-    - [IDPの代表例](#idpの代表例)
-    - [目指すべきもの](#目指すべきもの)
+    - [Internal Developer Portal](#internal-developer-portal)
+    - [Internal Developer Portalの代表例: Backstage](#internal-developer-portalの代表例-backstage)
   - [Wikiから始めるPlatform](#wikiから始めるplatform)
       - [MBS部のwiki...](#mbs部のwiki)
     - [MBS部のBacklogがあるじゃあないか！！！](#mbs部のbacklogがあるじゃあないか)
@@ -63,7 +64,7 @@
 - 計測とフィードバック
 ```
 
-### 効率的なDevOpsの実現 => Platform Engineering
+### 効率的なDevOpsの実現 => Platform Engineeringの登場
 
 ## What is Platform Engineering?
 
@@ -136,11 +137,35 @@
 
 ---
 
+## Internal Developer PortalとInternal Developer Platform
+
 ### Internal Developer Platform
 
-### IDPの代表例
+アプリケーションが動作する環境を抽象化したもの  
+**開発者が必要とする機能や仕組みをプラットフォームチームは整備する**
 
-### 目指すべきもの
+### Internal Developer Portal
+
+**開発者がプラットフォームを操作するためのUI**  
+ポータルによってセルフサービスでの利用を実現する
+
+
+
+![image](./image/2types_of_IDP.png)
+
+> [Backstageで始める新たな開発者体験](https://www.docswell.com/s/ussvgr/Z8GY72-2023-03-09-pfem-backstage#p14)
+
+### Internal Developer Portalの代表例: Backstage
+
+インフラ全体を網羅することを目的にSpotify社が開発した開発者向けポータルのOSS  
+2020年にCloud Native Computing Foundationに寄贈されている  
+下記のような機能で構成される
+- Template
+- Catalog
+- TechDocs
+- Plug-in
+
+Backstageを使うことで、開発者は多様なインフラツールに深い知識を持つ必要がなく、インフラを抽象化することで、安全かつ迅速にシステムを構築、スケールアップすることができる
 
 ---
 
