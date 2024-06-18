@@ -36,9 +36,9 @@
 
 ### 先進テクノロジーのハイプサイクル:2023年
 
-プラットフォーム エンジニアリングが2-5年以内に定常的に採用されることが予想されている
+現在ピーク期かつ5-10年以内にはクラウドネイティブがモダンな開発手法となっている
 
-![image](./image/hypesycle_for_software_engineering_2023.png)
+![image](./image/hypesycle_for_emerging_technologies_2023.png)
 
 ### ソフトウェアエンジニアリングのハイプサイクル:2023年
 
