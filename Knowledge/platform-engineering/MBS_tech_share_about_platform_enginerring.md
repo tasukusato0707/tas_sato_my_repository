@@ -20,6 +20,7 @@
     - [クラウドの登場 =\> Devopsの推進 =\> 認知負荷の増大化](#クラウドの登場--devopsの推進--認知負荷の増大化)
     - [認知負荷とは](#認知負荷とは)
     - [3種の認知負荷](#3種の認知負荷)
+  - [Platform Engineeringの目的](#platform-engineeringの目的)
   - [Internal Developer PortalとInternal Developer Platform](#internal-developer-portalとinternal-developer-platform)
     - [Internal Developer Platform](#internal-developer-platform)
     - [Internal Developer Portal](#internal-developer-portal)
@@ -130,10 +131,19 @@
 
 - 課題内在的負荷 (Intrinsic cognitive load)
     - 学習対象そのものの難易度により生じる負荷
+    - 学習者の既有知識や習熟度によって増減する
 - 課題外在的負荷 (Extraneous cognitive load)
     - 学習以外(指導者や教材)の難易度により生じる負荷
+    - 学習に無関係であり、余計な負荷
 - 学習関連負荷 (Germane cognitive load)
     - 学習目標の達成のための認知活動により生じる負荷
+
+**いかに、課題内在的負荷と課題外在的負荷をできる限り低減させ、学習関連負荷の割合を増やして生産的な学習をするかが重要**
+
+## Platform Engineeringの目的
+
+開発者に降りかかる認知負荷の軽減と、生産性の向上を目指し、  
+開発者を向けのセルフサービス型の基盤を提供する活動
 
 ---
 
@@ -141,15 +151,14 @@
 
 ### Internal Developer Platform
 
-アプリケーションが動作する環境を抽象化したもの  
-**開発者が必要とする機能や仕組みをプラットフォームチームは整備する**
+アプリケーションが動作する環境を抽象化(わかりやすく)したもの  
+開発者が必要とする機能や仕組みをプラットフォームチームは整備する  
+**開発者が「自分で構築して実行する」真のDevOpsを効果的に実現するもの**
 
 ### Internal Developer Portal
 
 **開発者がプラットフォームを操作するためのUI**  
-ポータルによってセルフサービスでの利用を実現する
-
-
+開発者ポータルによってセルフサービスでの利用を実現する
 
 ![image](./image/2types_of_IDP.png)
 
@@ -161,9 +170,13 @@
 2020年にCloud Native Computing Foundationに寄贈されている  
 下記のような機能で構成される
 - Template
+    - 社内標準の構成をテンプレート化することで、開発者は効率よくサービスを作成できる
 - Catalog
+    - 社内のアプリケーションをカタログ化して一覧表示する
 - TechDocs
+    - Markdown形式のドキュメントを一元管理する
 - Plug-in
+    - 拡張可能なプラグインを用いて、自社にあったツールやサービスを統合できる
 
 Backstageを使うことで、開発者は多様なインフラツールに深い知識を持つ必要がなく、インフラを抽象化することで、安全かつ迅速にシステムを構築、スケールアップすることができる
 
@@ -190,3 +203,10 @@ Backstageを使うことで、開発者は多様なインフラツールに深�
 - 上記を促すようなコミュニケーションをしていきましょう
 
 ## まとめ
+
+- Platform Engineeringは開発者に降りかかる認知負荷の軽減と、生産性の向上を目指し、  
+開発者を向けのセルフサービス型の基盤を提供する活動
+- Internal Developer Platformはアプリケーションが動作する環境を抽象化(わかりやすく)したもの
+- Internal Developer Portalは開発者がプラットフォームを操作するためのUI
+- Internal Developer Portalの代表例の1つがBackstage
+    - Backstageの続編はとうご期待...!!
