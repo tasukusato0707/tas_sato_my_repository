@@ -166,6 +166,8 @@
 
 ### Internal Developer Portalの代表例: Backstage
 
+![image](./image/backstage_icon.png)
+
 インフラ全体を網羅することを目的にSpotify社が開発した開発者向けポータルのOSS  
 2020年にCloud Native Computing Foundationに寄贈されている  
 下記のような機能で構成される
