@@ -12,14 +12,16 @@
    |--------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------|
    | 名前とタグ                                            | 任意の名前を指定                                                                                                                                                                                                                                                | ー                                                                                            |
    | Application and OS Images (Amazon Machine Image) | Red Hat Enterprise Linux 9 (HVM), SSD Volume Type                                                                                                                                                                                                       | ー                                                                                            |
-   | インスタンスタイプ                                        | t2.micro                                                                                                                                                                                                                                                | ー                                                                                            |
+   | インスタンスタイプ                                        | t2.small                                                                                                                                                                                                                                                | ー                                                                                            |
    | キーペア (ログイン)                                      | 自分用のキーペアを指定                                                                                                                                                                                                                                             | 今回はED25519でプライベートキーとパブリックキーを生成                                                               |
    | ネットワーク設定                                         | ・ネットワーク: デフォルト ※1<br/>・サブネット: 先順位なし (アベイラビリティーゾーンのデフォルトサブネット)<br/>・パブリック IP の自動割り当て: 有効化<br/>・ファイアウォール (セキュリティグループ): セキュリティグループを作成 ※2<br/>・Allow SSH traffic from: true ※3<br/>・インターネットからの HTTPS トラフィックを許可: false<br/>・インターネットからの HTTP トラフィックを許可: false | ※1: デフォルトで自動割り当てされる<br/>※2: 自分のIPからSSH接続が可能になるように設定<br/>※3: traficはデフォルトでOK(デフォルトは0.0.0.0/0) |
-   | ストレージを設定                                         | デフォルト                                                                                                                                                                                                                                                   | ー                                                                                            |
+   | ストレージを設定                                         | 30GiB                                                                                                                                                                                                                                                  | ー                                                                                            |
 
 2. 作成したインスタンスが下記内容の通りに立ち上げられていることを確認する
    - セキュリティのインバウンドグループが設定されていること
    - パブリックIPが自動割り当てされないこと 
+
+> SSH (ポート22) ,HTTP (ポート80) ポート3000,を許可の内容を追加
 
 ### Elastic IPの設定
 
@@ -49,103 +51,84 @@
 1. vscodeのconfigにインスタンスを登録
 2. SSH接続を実施する
 3. yum updateを実施
-   ```terminal
-   $ sudo yum update
-   ```
+   - システムのパッケージを最新の状態に更新します。
 
-4. gitのインストールを実施する
-   ```terminal
-   $ sudo yum install -y git
-   ```
+     ```terminal
+     $ sudo yum update -y
+     ```
 
-5. git cloneを実行する
+4. Node.jsのインストール
+   - Node.jsをインストールします。Node.jsはBackstageの動作に必要です。
+
+     ```terminal
+     $ curl -sL https://rpm.nodesource.com/setup_20.x | sudo bash -
+     $ sudo yum install -y nodejs
+     ```
+
+> 適応バージョンはBackstageの要求バージョンは要確認  
+> バージョンの変更が必要な場合は`setup_20.x`の部分を変更する
+
+5. 現在のNode.jsバージョンを確認
+   - 今回のケースではバージョン20以上であることを確認する
+
+     ```terminal
+     $ node -v
+     ```
+
+6. Yarnのインストール
+   -  Yarnをインストールします。Yarnはパッケージマネージャーで、Backstageの依存関係を管理します。
+
+      ```terminal
+      $ sudo npm install -g yarn
+      ```
+
+7. gitのインストールを実施する
+   -  Gitをインストールします。Gitはバージョン管理システムで、ソースコードの管理に使用します。
+
+      ```terminal
+      $ sudo yum install -y git
+      ```
+
+8. dockerのインストールを実施する
+   - dockerのインストールを実施します
+
+      ```terminal
+      $ sudo yum install  -y docker
+      ```
+
+9.  git cloneを実行する
+
    ```terminal
    $ git clone https://github.com/ap-communications/chocott-backstage.git --depth 1
    ```
 
-6. dockerのインストールを実施する
+### Backstage環境のセットアップ
 
-   ```terminal
-   $ sudo systemctl start docker
-   $ sudo systemctl enable docker
-   $ sudo docker ps
-   $ sudo docker images
-   $ docker --version
-   $ sudo curl -L https://github.com/docker/compose/releases/download/v2.26.1/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/dock
-   ```
+1. Backstageアプリケーションの作成
+   - Backstageアプリケーションを作成します。npxはnpmのツールで、一時的にパッケージを実行します。
+   - プロンプトに従ってアプリケーション名を入力します（例: my-backstage-app）。
 
-7. docker-composeをインストールする
+      ```terminal
+      $ npx @backstage/create-app@latest
+      ```
 
-   ```terminal
-   $ sudo curl -L https://github.com/docker/compose/releases/download/v2.26.1/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/dock
-   ```
+     > 作成には数分かかります  
+     > yarn installがうまくいかない場合は、以下のコマンドで、npmのグローバルディレクトリのパーミッションを修正します。
 
-### 本番
+      ```
+      sudo chown -R $(whoami) $(npm config get prefix)/{libnode_modules,bin,share}
+      ```
 
-- 基本は[ドキュメント](TBD)を参照。
+2. 作成されたディレクトリに移動します。
+   - 作成されたディレクトリに移動します。
 
-### Github App登録
+      ```terminal
+      $ cd my-backstage-app
+      ```
 
--  [Authenticationのドキュメント](https://github.com/ap-communications/chocott-backstage/blob/main/chocott-contents/docs/quick-start/index.md)を参考にAppを登録し、Client IdとClient Secret、Secretファイルを作成してください。
+3. 依存関係のインストール
+   - Backstageアプリケーションの依存関係をインストールします。
 
-  > 今回は個人アカウントで作成  
-  > localhostで作成しているところを作成したEC2ンスタンスのURLで作成する  
-  > ページ開かんけど無視
-
-  - webhook URLを登録する
-    - slack開く
-    - appの管理する -> アプリを検索する
-    - Incoming Webhookを検索してインストールする
-    - slackの追加を実行
-    - チャンネルの指定
-    - 赤文字で
-    - URLができあがるのでURLをコピー
-    - webhook secretをよしなに登録
-
-### Backend向けGitHubのインテグレーションの登録
-
-- 続けて、Backend向けのGitHub Integrationを実現するため、GitHub App Private Keyを作成します。 [Integratonのドキュメント](https://github.com/ap-communications/chocott-backstage/blob/main/chocott-contents/docs/integration/index.md) を参考に、Credential fileを作成します。 作成したファイルパスを GITHUB_CREDENTIAL_FILE という環境変数に設定します。
-
-### インスタンスにGithub Appを登録
-
-   ```terminal
-   $ export AUTH_GITHUB_CLIENT_ID="<Client IDの文字列>"
-   $ export AUTH_GITHUB_CLIENT_SECRET="<Secretの文字列>"
-   $ export GITHUB_CREDENTIAL_FILE="/<put your folder name>/github-credentials.yaml"
-   ```
-
-- パーソナルアカウントにGitHub Appを登録した場合には~の部分を実行する
-  - `./app-config.local.yaml`を作成しないとない
-
-### docker-composeを実行してBackstageを立ち上げる
-
-- 下記コマンドを実行してコンテナ立ち上げる
-
-   ```terminal
-   $ sudo -E docker-compose up -d"
-   ```
-
-
-
-
-1.EC2インスタンスの作成
-- Elastic IPの割り当て
-https://qiita.com/Jerid/items/d5dd3a29ed9a0e374493
-- セキュリティグループの設定
-  - インバウンドルールに3000の追加
-- EC2アクセス
-- gitインストール
-- dockerインストール
-- docker-composeインストール
-https://qiita.com/hiyuzawa/items/81490020568417d85e86
-https://qiita.com/hiyuzawa/items/81490020568417d85e86
-- sudo service docker start
-https://qiita.com/DQNEO/items/da5df074c48b012152ee
-
-
-- sudoつけてやる
-2.github apps登録
-3.integration登録
-4.個人アカウントで作成
-
-- アクセス
+      ```terminal
+      $ yarn install
+      ```
